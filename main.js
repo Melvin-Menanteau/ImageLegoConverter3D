@@ -66,6 +66,7 @@ scene.add(hemisphereLight);
 const orbitControls = new OrbitControls(mainCamera, canvas);
 orbitControls.target.set(0, 0, 0);
 orbitControls.enableDamping = true; // Enable damping (inertia) for smoother controls
+orbitControls.maxPolarAngle = Math.PI / 2; // Limit vertical rotation to prevent flipping
 
 /* ----------------------------------------------
     ANIMATION
