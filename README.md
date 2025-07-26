@@ -23,7 +23,7 @@ It is possible to change the pixelation level, which affects the number of Lego 
 
 ## Run the Project
 
-1. Clone the repository: ```git clone <repository-url>```
+1. Clone the repository: ```git clone https://github.com/Melvin-Menanteau/ImageLegoConverter3D.git```
 2. Navigate to the project directory: ```cd ImageLegoConverter3D```
 3. Install the dependencies: ```npm install```
 4. Start the development server: ```npx vite```
