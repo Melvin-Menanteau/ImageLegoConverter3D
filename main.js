@@ -3,7 +3,6 @@
 ---------------------------------------------- */
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-import { GUI } from 'three/addons/libs/lil-gui.module.min.js'
 import { ImageHandler } from './classes/ImageHandler';
 import { LegoRoundTile } from './classes/LegoRoundTile';
 
@@ -24,8 +23,6 @@ const canvas = document.querySelector('#threeCanvas');
 ---------------------------------------------- */
 const scene = new THREE.Scene();
 scene.background = new THREE.Color().setHex(SCENE_BACKGROUND_COLOR);
-const axesHelper = new THREE.AxesHelper(5);
-// scene.add(axesHelper);
 
 /* ----------------------------------------------
     RENDERER
@@ -42,6 +39,15 @@ mainCamera.position.set(0, 0, 15);
 mainCamera.lookAt(0, 0, 0);
 
 let ACTIVE_CAMERA = mainCamera; // Set the active camera to the main camera
+const ACTIVE_CAMERA_POSITION = new THREE.Vector3(0, 0, 15);
+const ACTIVE_CAMERA_LOOK_AT = new THREE.Vector3(0, 0, 0);
+
+function resetActiveCameraView() {
+    ACTIVE_CAMERA.position.copy(ACTIVE_CAMERA_POSITION);
+    ACTIVE_CAMERA.lookAt(ACTIVE_CAMERA_LOOK_AT);
+}
+
+document.getElementById('resetCamera').addEventListener('click', resetActiveCameraView);
 
 /* ----------------------------------------------
     LIGHT
@@ -63,17 +69,24 @@ scene.add(hemisphereLight);
     CONTROLS
 ---------------------------------------------- */
 // Orbit controls for camera movement
+let ORBIT_CONTROLS_ENABLED = true;
+
 const orbitControls = new OrbitControls(mainCamera, canvas);
 orbitControls.target.set(0, 0, 0);
 orbitControls.enableDamping = true; // Enable damping (inertia) for smoother controls
 orbitControls.maxPolarAngle = Math.PI / 2; // Limit vertical rotation to prevent flipping
+
+document.getElementById('toggleControls').addEventListener('click', () => {
+    ORBIT_CONTROLS_ENABLED = !ORBIT_CONTROLS_ENABLED;
+    orbitControls.enabled = ORBIT_CONTROLS_ENABLED;
+    document.getElementById('toggleControls').classList.toggle('selected');
+});
 
 /* ----------------------------------------------
     ANIMATION
 ---------------------------------------------- */
 function clearScene() {
     scene.remove.apply(scene, scene.children);
-    // scene.add(axesHelper); // Re-add axes helper to the scene
 }
 
 function animate() {
@@ -100,16 +113,19 @@ function generateGeometry(tileList) {
         scene.add(mesh);
     });
 
-    ACTIVE_CAMERA.position.set(
+    ACTIVE_CAMERA_POSITION.set(
         imageHandler.nbCols * PARAMS.TILE_DIAMETER / 2,
-        (imageHandler.nbCols * PARAMS.TILE_DIAMETER / 2) * 1.4,
+        (imageHandler.nbCols * PARAMS.TILE_DIAMETER / 2) * 1.6,
         imageHandler.nbRows * PARAMS.TILE_DIAMETER / 2
     );
-    ACTIVE_CAMERA.lookAt(
+    ACTIVE_CAMERA_LOOK_AT.set(
         imageHandler.nbCols * PARAMS.TILE_DIAMETER / 2,
         0,
         imageHandler.nbRows * PARAMS.TILE_DIAMETER / 2
     );
+
+    resetActiveCameraView();
+
     orbitControls.target.set(
         imageHandler.nbCols * PARAMS.TILE_DIAMETER / 2,
         0,
@@ -126,24 +142,19 @@ window.addEventListener('keydown', (event) => {
 });
 
 const PARAMS = {
-    TILE_DIAMETER: 5,
+    TILE_DIAMETER: 10,
     TILE_HEIGHT: 3
 };
+
+document.getElementById('pixelationLevel').addEventListener('change', (event) => {
+    PARAMS.TILE_DIAMETER = parseInt(event.target.value, 10);
+    imageHandler.diameter = PARAMS.TILE_DIAMETER;
+    imageHandler.pixelate();
+    generateGeometry(imageHandler.toTile());
+});
 
 const imageHandler = new ImageHandler('/images/1.png', PARAMS.TILE_DIAMETER, 500, 500);
 
 imageHandler.loadImage().then(() => {
-    generateGeometry(imageHandler.toTile());
-});
-
-/* ----------------------------------------------
-    GUI
----------------------------------------------- */
-const gui = new GUI();
-
-const configurationFolder = gui.addFolder('Configuration');
-configurationFolder.add(PARAMS, 'TILE_DIAMETER', 1, 20, 1).name('Tile Diameter').onFinishChange(() => {
-    imageHandler.diameter = PARAMS.TILE_DIAMETER;
-    imageHandler.pixelate();
     generateGeometry(imageHandler.toTile());
 });
