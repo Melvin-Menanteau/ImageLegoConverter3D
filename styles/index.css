@@ -94,3 +94,7 @@ menu > .buttonGroup {
         outline: none;
     }
 }
+
+#uploadButton {
+    display: none;
+}

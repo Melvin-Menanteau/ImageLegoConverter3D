@@ -52,7 +52,7 @@ It is possible to change the pixelation level, which affects the number of Lego 
 
 - [X] Interface to define the pixelation level
 - [ ] Use only Lego official round tile colors
-- [ ] Add a button to upload an image
+- [X] Add a button to upload an image
 - [ ] Add a button to download the resulting image
 
 ### Nice-to-Have Features

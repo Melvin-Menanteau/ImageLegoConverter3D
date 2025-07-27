@@ -29,6 +29,7 @@ export class ImageHandler {
     get nbCols() { return this.#nbCols; }
     get diameter() { return this.#diameter; }
     set diameter(value) { this.#diameter = value; }
+    set imagePath(value) { this.#imagePath = value; }
 
     /* -----------------------------------
         PRIVATE METHODS

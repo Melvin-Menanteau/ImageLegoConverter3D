@@ -158,3 +158,15 @@ const imageHandler = new ImageHandler('/images/1.png', PARAMS.TILE_DIAMETER, 500
 imageHandler.loadImage().then(() => {
     generateGeometry(imageHandler.toTile());
 });
+
+document.getElementById('uploadButton').addEventListener('change', (event) => {
+    const file = event.target.files[0];
+
+    if (file) {
+        const url = URL.createObjectURL(file);
+        imageHandler.imagePath = url;
+        imageHandler.loadImage().then(() => {
+            generateGeometry(imageHandler.toTile());
+        });
+    }
+});

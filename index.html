@@ -18,10 +18,11 @@
 		</div>
 		<hr>
 		<div class="buttonGroup">
-			<input id="pixelationLevel" type="number" value="10" min="1" max="50" step="1">
-			<div id="uploadButton" class="button">
+			<input id="pixelationLevel" type="number" value="10" min="1" max="50" step="1"></input>
+			<label for="uploadButton" class="button">
 				<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Material Symbols by Google - https://github.com/google/material-design-icons/blob/master/LICENSE --><path fill="#888888" d="M12 15.575q-.2 0-.375-.062T11.3 15.3l-3.6-3.6q-.3-.3-.288-.7t.288-.7q.3-.3.713-.312t.712.287L11 12.15V5q0-.425.288-.712T12 4t.713.288T13 5v7.15l1.875-1.875q.3-.3.713-.288t.712.313q.275.3.288.7t-.288.7l-3.6 3.6q-.15.15-.325.213t-.375.062M6 20q-.825 0-1.412-.587T4 18v-2q0-.425.288-.712T5 15t.713.288T6 16v2h12v-2q0-.425.288-.712T19 15t.713.288T20 16v2q0 .825-.587 1.413T18 20z"/></svg>
-			</div>
+				<input id="uploadButton" type="file" accept="image/*" class="button">
+			</label>
 			<div id="resetPicture" class="button">
 				<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Material Symbols by Google - https://github.com/google/material-design-icons/blob/master/LICENSE --><path fill="#888888" d="M3 9V3h2v3.35Q6.25 4.8 8.063 3.9T12 3q2.95 0 5.263 1.675T20.5 9h-2.175q-.85-1.8-2.525-2.9T12 5q-1.425 0-2.688.525T7.1 7H9v2zm3 9h12l-3.75-5l-3 4L9 14zm-1 4q-.825 0-1.412-.587T3 20v-8h2v8h14v-8h2v8q0 .825-.587 1.413T19 22z"/></svg>
 			</div>
