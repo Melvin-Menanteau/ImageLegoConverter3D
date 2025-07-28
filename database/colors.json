@@ -85,56 +85,6 @@
         "hex": "#E1D5ED"
     },
     {
-        "id": 33,
-        "name": "Trans-Dark Blue",
-        "hex": "#0020A0"
-    },
-    {
-        "id": 34,
-        "name": "Trans-Green",
-        "hex": "#84B68D"
-    },
-    {
-        "id": 35,
-        "name": "Trans-Bright Green",
-        "hex": "#D9E4A7"
-    },
-    {
-        "id": 36,
-        "name": "Trans-Red",
-        "hex": "#C91A09"
-    },
-    {
-        "id": 40,
-        "name": "Trans-Brown",
-        "hex": "#635F52"
-    },
-    {
-        "id": 41,
-        "name": "Trans-Light Blue",
-        "hex": "#AEEFEC"
-    },
-    {
-        "id": 45,
-        "name": "Trans-Dark Pink",
-        "hex": "#DF6695"
-    },
-    {
-        "id": 46,
-        "name": "Trans-Yellow",
-        "hex": "#F5CD2F"
-    },
-    {
-        "id": 47,
-        "name": "Trans-Clear",
-        "hex": "#FCFCFC"
-    },
-    {
-        "id": 52,
-        "name": "Trans-Purple",
-        "hex": "#A5A5CB"
-    },
-    {
         "id": 70,
         "name": "Reddish Brown",
         "hex": "#582A12"
@@ -175,16 +125,6 @@
         "hex": "#D09168"
     },
     {
-        "id": 114,
-        "name": "Glitter Trans-Dark Pink",
-        "hex": "#DF6695"
-    },
-    {
-        "id": 117,
-        "name": "Glitter Trans-Clear",
-        "hex": "#FFFFFF"
-    },
-    {
         "id": 158,
         "name": "Yellowish Green",
         "hex": "#DFEEA5"
@@ -193,11 +133,6 @@
         "id": 179,
         "name": "Flat Silver",
         "hex": "#898788"
-    },
-    {
-        "id": 182,
-        "name": "Trans-Orange",
-        "hex": "#F08F1C"
     },
     {
         "id": 191,
@@ -275,34 +210,9 @@
         "hex": "#D9D9D9"
     },
     {
-        "id": 1003,
-        "name": "Glitter Trans-Light Blue",
-        "hex": "#68BCC5"
-    },
-    {
         "id": 1050,
         "name": "Coral",
         "hex": "#FF698F"
-    },
-    {
-        "id": 1053,
-        "name": "Opal Trans-Light Blue",
-        "hex": "#68BCC5"
-    },
-    {
-        "id": 1055,
-        "name": "Opal Trans-Clear",
-        "hex": "#FCFCFC"
-    },
-    {
-        "id": 1060,
-        "name": "Opal Trans-Bright Green",
-        "hex": "#84B68D"
-    },
-    {
-        "id": 1061,
-        "name": "Opal Trans-Dark Blue",
-        "hex": "#0020A0"
     },
     {
         "id": 1062,
