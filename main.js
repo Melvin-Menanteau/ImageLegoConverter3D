@@ -93,7 +93,7 @@ function animate() {
     renderer.render(scene, ACTIVE_CAMERA);
 }
 
-function generateGeometry(tileList) {
+function generateGeometry(tileList, resetCamera = true) {
     clearScene();
 
     const geometry = new THREE.CylinderGeometry(PARAMS.TILE_DIAMETER / 2, PARAMS.TILE_DIAMETER / 2, PARAMS.TILE_HEIGHT, 32);
@@ -102,6 +102,10 @@ function generateGeometry(tileList) {
 
     tileList.forEach(tile => {
         const legoTile = new LegoRoundTile(tile.diameter, PARAMS.TILE_HEIGHT, tile.color);
+
+        if (USE_ONLY_OFFICIAL_COLORS)
+            legoTile.color = legoTile.findClosestOfficialColor(); // Ensure the color is set to the closest official color
+
         const material = new THREE.MeshStandardMaterial({
             color: new THREE.Color(legoTile.color),
             roughness: 0.5,
@@ -113,24 +117,26 @@ function generateGeometry(tileList) {
         scene.add(mesh);
     });
 
-    ACTIVE_CAMERA_POSITION.set(
-        imageHandler.nbCols * PARAMS.TILE_DIAMETER / 2,
-        (imageHandler.nbCols * PARAMS.TILE_DIAMETER / 2) * 1.6,
-        imageHandler.nbRows * PARAMS.TILE_DIAMETER / 2
-    );
-    ACTIVE_CAMERA_LOOK_AT.set(
-        imageHandler.nbCols * PARAMS.TILE_DIAMETER / 2,
-        0,
-        imageHandler.nbRows * PARAMS.TILE_DIAMETER / 2
-    );
+    if (resetCamera) {
+        ACTIVE_CAMERA_POSITION.set(
+            imageHandler.nbCols * PARAMS.TILE_DIAMETER / 2,
+            (imageHandler.nbCols * PARAMS.TILE_DIAMETER / 2) * 1.6,
+            imageHandler.nbRows * PARAMS.TILE_DIAMETER / 2
+        );
+        ACTIVE_CAMERA_LOOK_AT.set(
+            imageHandler.nbCols * PARAMS.TILE_DIAMETER / 2,
+            0,
+            imageHandler.nbRows * PARAMS.TILE_DIAMETER / 2
+        );
 
-    resetActiveCameraView();
+        resetActiveCameraView();
 
-    orbitControls.target.set(
-        imageHandler.nbCols * PARAMS.TILE_DIAMETER / 2,
-        0,
-        imageHandler.nbRows * PARAMS.TILE_DIAMETER / 2
-    );
+        orbitControls.target.set(
+            imageHandler.nbCols * PARAMS.TILE_DIAMETER / 2,
+            0,
+            imageHandler.nbRows * PARAMS.TILE_DIAMETER / 2
+        );
+    }
 }
 
 renderer.setAnimationLoop(animate);
@@ -169,4 +175,13 @@ document.getElementById('uploadButton').addEventListener('change', (event) => {
             generateGeometry(imageHandler.toTile());
         });
     }
+});
+
+let USE_ONLY_OFFICIAL_COLORS = false;
+
+document.getElementById('officialColorsButton').addEventListener('click', () => {
+    USE_ONLY_OFFICIAL_COLORS = !USE_ONLY_OFFICIAL_COLORS;
+    document.getElementById('officialColorsButton').classList.toggle('selected');
+
+    generateGeometry(imageHandler.toTile(), false);
 });
